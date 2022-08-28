@@ -1,0 +1,64 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct solve{
+    int id;
+    int aTime;
+    int bTime;
+
+};
+
+bool isComplete(solve arr[], int n){
+    for(int i=0; i<n; i++){
+        if(arr[i].bTime>0){
+            return true;
+        }
+    }
+    return false;
+
+}
+
+
+int main() {
+    solve arr[100];
+    int n;
+    cin>>n;
+    int p[n];
+    for(int i=0; i<n; i++){
+        int a,b;
+        cin>>a>>b;
+        arr[i].bTime = a;
+        arr[i].aTime= b;
+        arr[i].id=i;
+        p[i] = arr[i].aTime;
+
+    }
+    sort(p,p+n);
+    /*for(int i=0; i<n; i++){
+        cout<< p[i]<< " ";
+    }*/
+    //cout<<endl;
+    vector<int>v;
+    int Tq = 2 ;
+    for(int i=0; ; i++) {
+        for(int j = 0; j < n; j++){
+            if(p[i%3] ==  arr[j].aTime && arr[j].bTime>0){
+                arr[j].bTime-=Tq;
+                //cout<<arr[j].aTime << " ";
+                v.push_back(arr[j].id);
+                break;
+            }
+        }
+
+
+        if(!isComplete(arr,n)){
+            break;
+            cout<< "pp";
+
+        }
+    }
+    for(int i=0; i<v.size(); i++){
+        cout<< v[i] << " ";
+    }
+
+
+}
