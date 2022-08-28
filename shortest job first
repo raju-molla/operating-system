@@ -1,0 +1,78 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+
+struct solve{
+    int bTime;
+    int aTime;
+    int visisted = 0;
+    int turnTime;
+    int waitTime;
+    int cTime;
+
+
+
+};
+
+int main()
+{
+    solve arr[100];
+    int n;
+    cin>>n;
+
+    for(int i=0; i<n; i++){
+        int a,b;
+        cin>>a>>b;
+        arr[i].bTime=a;
+        arr[i].aTime = b;
+    }
+    int p = 0;
+    vector<int>v;
+    v.push_back(p);
+    int t=n;
+
+
+        while(t--){
+            vector<pair<int,int> >q;
+            for(int i=0; i<n; i++){
+                if(p>=arr[i].aTime && arr[i].visisted==0){
+                        q.push_back({arr[i].bTime,i});
+                }
+            }
+            sort(q.begin(),q.end());
+            arr[q[0].second].visisted=1;
+            p+=q[0].first;
+            arr[q[0].second].cTime=p;
+            v.push_back(p);
+
+            //cout<<p<<endl;
+            q.clear();
+        }
+        cout<<"completeion time: \n";
+        for(int i=0; i<n; i++){
+            cout<<arr[i].cTime<< " ";
+        }
+        cout<<endl;
+        for(int i=0; i<n; i++){
+            arr[i].turnTime = arr[i].cTime-arr[i].aTime;
+            cout<<arr[i].turnTime<< " ";
+        }
+        cout<<endl;
+        cout<<"Waiting Time:\n";
+        for(int i=0; i<n; i++){
+            arr[i].waitTime = arr[i].turnTime-arr[i].bTime;
+            cout<<arr[i].waitTime<< " ";
+        }
+
+        cout<<endl;
+
+
+}
+
+/*
+    4
+3 0
+4 2
+6 5
+3 3
+*/
